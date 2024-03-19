@@ -1,6 +1,9 @@
 defmodule TestFinalWeb.Router do
   use TestFinalWeb, :router
 
+  use Phoenix.Router
+  import Phoenix.LiveView.Router
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -14,10 +17,15 @@ defmodule TestFinalWeb.Router do
     plug :accepts, ["json"]
   end
 
+  # Import card_component
+
   scope "/", TestFinalWeb do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/test", Live.PageLive.Index
+    live "/thermostat", ThermostatLive
+
   end
 
   # Other scopes may use custom stacks.
