@@ -25,6 +25,7 @@ defmodule TestFinalWeb.Router do
     get "/", PageController, :home
     live "/test", Live.PageLive.Index
     live "/thermostat", ThermostatLive
+    live "/features", FeaturesLive
 
   end
 
