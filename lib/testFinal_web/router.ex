@@ -26,6 +26,7 @@ defmodule TestFinalWeb.Router do
     # No layout
     live "/features", FeaturesLive
     live "/register", RegisterLive
+    live "/login", LoginLive
 
   end
 
