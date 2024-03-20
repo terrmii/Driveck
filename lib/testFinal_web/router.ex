@@ -1,5 +1,4 @@
 defmodule TestFinalWeb.Router do
-
   use Phoenix.Router
   import Phoenix.LiveView.Router
 
@@ -24,7 +23,9 @@ defmodule TestFinalWeb.Router do
     # get "/", PageController, :home
     live "/test", Live.PageLive.Index
     live "/", ThermostatLive
+    # No layout
     live "/features", FeaturesLive
+    live "/register", RegisterLive
 
   end
 
