@@ -3,3 +3,21 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+
+/* Webkit (Chrome, Safari, Opera) */
+::-webkit-scrollbar {
+    width: 5px; /* width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f0f000; /* color of the track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* color of the thumb */
+    border-radius: 6px; /* roundness of the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* color of the thumb on hover */
+}

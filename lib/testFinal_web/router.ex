@@ -1,5 +1,4 @@
 defmodule TestFinalWeb.Router do
-  use TestFinalWeb, :router
 
   use Phoenix.Router
   import Phoenix.LiveView.Router
@@ -22,9 +21,9 @@ defmodule TestFinalWeb.Router do
   scope "/", TestFinalWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    # get "/", PageController, :home
     live "/test", Live.PageLive.Index
-    live "/thermostat", ThermostatLive
+    live "/", ThermostatLive
     live "/features", FeaturesLive
 
   end

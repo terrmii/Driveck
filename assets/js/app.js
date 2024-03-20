@@ -42,3 +42,28 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+
+document.addEventListener("DOMContentLoaded", function() {
+  const navLinks = document.querySelectorAll('.nav-item');
+
+  navLinks.forEach(link => {
+    link.addEventListener('mouseover', () => {
+      const hoverText = link.getAttribute('data-hover-text');
+      updateHoverText(hoverText);
+    });
+
+    link.addEventListener('mouseleave', () => {
+      resetHoverText();
+    });
+  });
+
+  function updateHoverText(text) {
+    // Update hover text
+    document.querySelector('.navbar').setAttribute('data-hover-text', text);
+  }
+
+  function resetHoverText() {
+    // Reset hover text
+    document.querySelector('.navbar').removeAttribute('data-hover-text');
+  }
+});
