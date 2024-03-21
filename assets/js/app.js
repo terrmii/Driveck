@@ -88,12 +88,28 @@ document.addEventListener('DOMContentLoaded', function() {
       event.preventDefault();
       const draggedItem = event.dataTransfer.getData('text/plain');
 
+      const newP = document.createElement('p');
+      newP.innerText = 'Temperature: 72°F';
       // Check if the dropped item is the temperature card
       if (draggedItem === 'temperature') {
         // Append the temperature card to the dropzone
         dropzone.appendChild(temperatureCard);
         // Delete the p belong to the dropzone
         const p = dropzone.querySelector('p');
+
+        // Append just once to the temperature card
+
+
+        temperatureCard.innerHTML = `
+        <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800 dropzone" data-target="temperature">
+            <img src="/images/icons8-temperature-96.png" alt="Temperature Icon" style="filter: invert(100%)" class="w-8 h-8 mr-4">
+            <div>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Temperature</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">21 º C</p>
+            </div>
+        </div>
+    `;
+
         if (p) {
           p.remove();
         }
