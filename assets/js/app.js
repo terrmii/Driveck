@@ -67,3 +67,38 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('.navbar').removeAttribute('data-hover-text');
   }
 });
+
+// Add JavaScript event listeners to handle dragging and dropping
+document.addEventListener('DOMContentLoaded', function() {
+  const temperatureCard = document.getElementById('temperature-card');
+  const dropzones = document.querySelectorAll('.dropzone');
+
+  // Add event listener to the temperature card to initiate dragging
+  temperatureCard.addEventListener('dragstart', function(event) {
+    event.dataTransfer.setData('text/plain', 'temperature');
+  });
+
+  // Add event listeners to each dropzone <li> element
+  dropzones.forEach(dropzone => {
+    dropzone.addEventListener('dragover', function(event) {
+      event.preventDefault();
+    });
+
+    dropzone.addEventListener('drop', function(event) {
+      event.preventDefault();
+      const draggedItem = event.dataTransfer.getData('text/plain');
+
+      // Check if the dropped item is the temperature card
+      if (draggedItem === 'temperature') {
+        // Append the temperature card to the dropzone
+        dropzone.appendChild(temperatureCard);
+        // Delete the p belong to the dropzone
+        const p = dropzone.querySelector('p');
+        if (p) {
+          p.remove();
+        }
+        
+      }
+    });
+  });
+});
