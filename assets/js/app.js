@@ -72,16 +72,23 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener('DOMContentLoaded', function() {
   const temperatureCard = document.getElementById('temperature-card');
   const humidityCard = document.getElementById('humidity-card');
+  const dataCard = document.getElementById('data-card');
   const dropzones = document.querySelectorAll('.dropzone');
 
   // Add event listener to the temperature card to initiate dragging
   temperatureCard.addEventListener('dragstart', function(event) {
     event.dataTransfer.setData('text/plain', 'temperature');
+    
   });
 
   // Add event listener to the humidity card to initiate dragging
   humidityCard.addEventListener('dragstart', function(event) {
     event.dataTransfer.setData('text/plain', 'humidity');
+  });
+
+  // Add event listener to the data card to initiate dragging
+  dataCard.addEventListener('dragstart', function(event) {
+    event.dataTransfer.setData('text/plain', 'data');
   });
 
   // Add event listeners to each dropzone <li> element
@@ -118,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // Set the innerHTML for h-28 dropzone
           temperatureCard.innerHTML = `
           <div class="flex items-center justify-center rounded h-28 dropzone" data-target="temperature">
-              <img src="/images/icons8-temperature-96.png" alt="Temperature Icon" style="filter: invert(100%)" class="w-8 h-8 mr-4">
+              <img src="/images/icons8-temperature-96.png" alt="Temperature Icon" style="filter: invert(100%)" class="w-14 mr-4">
               <div>
                   <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Temperature</h5>
                   <p class="font-normal text-gray-700 dark:text-gray-400">21 º C</p>
@@ -127,23 +134,22 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
       
         } else if (dropzone.classList.contains('h-24')) {
-          // Set the innerHTML for h-28 dropzone
+          // Set the innerHTML for h-24 dropzone
           temperatureCard.innerHTML = `
-          <div id="temperature-card" class=" p-4 rounded-lg" draggable="true" style="z-index: 999;">
-            <img src="/images/icons8-temperature-96.png" alt="Temperature Icon" style="filter: invert(100%)" class="mr-1 h-8">
-            <div>
-              <h5 class="mb-1 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Temperature</h5>
-              <p class="font-normal text-gray-700 dark:text-gray-400 text-sm">21 º C</p>
-            </div>
+          <div class="flex items-center justify-center rounded h-24 dropzone" data-target="temperature">
+              <img src="/images/icons8-temperature-96.png" alt="Temperature Icon" style="filter: invert(100%)" class="w-8 h-8 mr-4">
+              <div>
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Temperature</h5>
+                  <p class="font-normal text-gray-700 dark:text-gray-400">21 º C</p>
+              </div>
           </div>
       `;
-      
         }
 
         // Delete the p with text-2xl text-gray-400 dark:text-gray-500 class belong to the dropzone
         const p = dropzone.querySelector('p.text-2xl.text-gray-400.dark\\:text-gray-500');
         if (p) {
-          p.remove();
+          p.style.display = 'none';
         }
         
       }else if(draggedItem === 'humidity'){
@@ -189,9 +195,51 @@ document.addEventListener('DOMContentLoaded', function() {
           // Delete the p with text-2xl text-gray-400 dark:text-gray-500 class belong to the dropzone
           const p = dropzone.querySelector('p.text-2xl.text-gray-400.dark\\:text-gray-500');
           if (p) {
-            p.remove();
+            p.style.display = 'none';
           }
+      }else if(draggedItem === 'data'){
+        dropzone.appendChild(dataCard);
+        if (dropzone.classList.contains('h-48')) {
+          // Set the innerHTML for h-48 dropzone
+          dataCard.innerHTML = `
+          <div class="flex items-center justify-center rounded h-48 dropzone" data-target="temperature">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Data</h5>
+              <img src="/images/map-example.jpg" class="my-8 ml-4 h-18 border border-slate-950" alt="Map example">
+              <p class="text-4xl text-gray-700 dark:text-gray-400 ml-5"><b>ID:</b> 23</p>
+              <p class="text-4xl text-gray-700 dark:text-gray-400 ml-4"><b>Location:</b> Bishoptown</p>
+              <p class="text-4xl text-gray-700 dark:text-gray-400 ml-4"><b>Name:</b> John</p>
+          </div>
+      `; // Replace with the actual HTML for h-48 dropzone
+      }else if(dropzone.classList.contains('h-28')){
+        // Set the innerHTML for h-28 dropzone
+        dataCard.innerHTML = `
+        <div class="flex items-center justify-center rounded h-28 dropzone" data-target="temperature">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Data</h5>
+            <img src="/images/map-example.jpg" class="my-6 ml-2 h-9 border border-slate-950" alt="Map example">
+            <p class="font-normal text-gray-700 dark:text-gray-400 ml-3"><b>ID:</b> 23</p>
+            <p class="font-normal text-gray-700 dark:text-gray-400 ml-2"><b>Location:</b> Bishoptown</p>
+            <p class="font-normal text-gray-700 dark:text-gray-400 ml-2"><b>Name:</b> John</p>
+        </div>
+    
+    `;
+      }else if (dropzone.classList.contains('h-24')) {
+        // Set the innerHTML for h-28 dropzone
+        dataCard.innerHTML = `
+        <div class="flex items-center justify-center rounded h-24 dropzone" data-target="temperature">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Data</h5>
+            <img src="/images/map-example.jpg" class="my-6 ml-2 h-9 border border-slate-950" alt="Map example">
+            <p class="font-normal text-gray-700 dark:text-gray-400 ml-3"><b>ID:</b> 23</p>
+            <p class="font-normal text-gray-700 dark:text-gray-400 ml-2"><b>Location:</b> Bishoptown</p>
+            <p class="font-normal text-gray-700 dark:text-gray-400 ml-2"><b>Name:</b> John</p>
+        </div>
+    `;
       }
+        // Delete the p with text-2xl text-gray-400 dark:text-gray-500 class belong to the dropzone
+        const p = dropzone.querySelector('p.text-2xl.text-gray-400.dark\\:text-gray-500');
+        if (p) {
+          p.style.display = 'none';
+        }
+    };
     });
   });
 });
@@ -199,6 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get the temperature card, humidity card, and dropdown
     const temperatureCard = document.getElementById('temperature-card');
     const humidityCard = document.getElementById('humidity-card');
+    const dataCard = document.getElementById('data-card');
     const dropdown = document.getElementById('dropdown-example'); // Replace with the actual id of your dropdown
 
     // Add a context menu event listener to the temperature card
@@ -208,8 +257,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // Remove the temperature card
       temperatureCard.remove();
 
-      // Create a new temperature card
-      const newTemperatureCard = document.createElement('li');
+      // Get Temperature Li
+      const newTemperatureCard = document.getElementById('temperatureLi');
       newTemperatureCard.innerHTML = `
         <a href="#" id="temperature-card" data-target="temperature" draggable="true" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
           Temperature
@@ -240,8 +289,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // Remove the humidity card
       humidityCard.remove();
 
-      // Create a new humidity card
-      const newHumidityCard = document.createElement('li');
+      // Get Humidity Li
+      const newHumidityCard = document.getElementById('humidityLi');
       newHumidityCard.innerHTML = `
         <a href="#" id="humidity-card" data-target="humidity" draggable="true" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
           Humidity
@@ -263,5 +312,36 @@ document.addEventListener('DOMContentLoaded', function() {
       newHumidityCardElement.addEventListener('dragend', function(event) {
         event.preventDefault();
         newHumidityCardElement.remove();
+      });
+      
+    });
+
+    dataCard.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
+  
+      // Remove the data card
+      dataCard.remove();
+  
+      // Get Data Li
+      const newDataCard = document.getElementById('dataLi');
+      newDataCard.innerHTML = `
+        <a href="#" id="data-card" data-target="data" draggable="true" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+          Data
+        </a>
+      `;
+  
+      // Add the new data card to the dropdown
+      dropdown.appendChild(newDataCard);
+  
+      // Get the new data card
+      const newDataCardElement = document.getElementById('data-card');
+  
+      // Add drag and drop event listeners to the new data card
+      newDataCardElement.addEventListener('dragstart', function(event) {
+        event.dataTransfer.setData('text/plain', 'data');
+      });
+      newDataCardElement.addEventListener('dragend', function(event) {
+        event.preventDefault();
+        newDataCardElement.remove();
       });
     });
