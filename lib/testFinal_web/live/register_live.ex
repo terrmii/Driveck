@@ -1,6 +1,7 @@
 defmodule TestFinalWeb.RegisterLive do
   # use TestFinalWeb, :live_view
   use Phoenix.LiveView, layout: false
+  alias TestFinal.User
 
   def render(assigns) do
     ~H"""
@@ -15,7 +16,7 @@ defmodule TestFinalWeb.RegisterLive do
                   <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                       Create and account
                   </h1>
-                  <form class="space-y-4 md:space-y-6" action="#">
+                  <form class="space-y-4 md:space-y-6" action="#" phx-submit="submit_form">
                       <div>
                           <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                           <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required>
@@ -32,7 +33,7 @@ defmodule TestFinalWeb.RegisterLive do
                                       <div class="h-1 bg-gray-200 dark:bg-gray-600"></div>
                                       <div class="h-1 bg-gray-200 dark:bg-gray-600"></div>
                                   </div>
-                                  <p>It’s better to have:</p>
+                                  <p>It's better to have:</p>
                                   <ul>
                                       <li class="flex items-center mb-1">
                                           <svg class="w-3.5 h-3.5 me-2 text-green-400 dark:text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
@@ -132,5 +133,23 @@ defmodule TestFinalWeb.RegisterLive do
   def mount(_params, _session, socket) do
     {:ok, assign(socket, layout: false)}
   end
+
+    # Handle form submission event
+    def handle_event("submit_form", %{"email" => email, "password" => password}, socket) do
+    # Assuming you have a User schema defined
+    changeset = User.changeset(%User{}, %{
+        email: email,
+        password: password
+    })
+
+    case TestFinal.Repo.insert(changeset) do
+        {:ok, _user} ->
+        # Insertion successful, redirect or perform any necessary action
+        {:noreply, socket}
+        {:error, changeset} ->
+        # Insertion failed due to validation errors
+        {:noreply, assign(socket, changeset: changeset)}
+    end
+end
 
 end

@@ -11,7 +11,7 @@ module.exports = {
     "../lib/testFinal_web.ex",
     "../lib/testFinal_web/**/*.*ex"
   ],
-  darkMode: 'media',
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {

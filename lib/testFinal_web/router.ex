@@ -22,11 +22,12 @@ defmodule TestFinalWeb.Router do
 
     # get "/", PageController, :home
     live "/test", Live.PageLive.Index
-    live "/", ThermostatLive
+    live "/", IndexLive
     # No layout
     live "/features", FeaturesLive
     live "/register", RegisterLive
     live "/login", LoginLive
+    live "/counter", CounterLive
 
   end
 
