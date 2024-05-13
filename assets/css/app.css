@@ -6,19 +6,26 @@
 
 /* Webkit (Chrome, Safari, Opera) */
 ::-webkit-scrollbar {
-    width: 5px; /* width of the scrollbar */
+    width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f0f0f000; /* color of the track */
+    background: #f0f0f000;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888; /* color of the thumb */
-    border-radius: 6px; /* roundness of the thumb */
+    background: #888; 
+    border-radius: 6px; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555; /* color of the thumb on hover */
+    background: #555; 
 }
 
+html {
+    scroll-behavior: smooth;
+  }
+
+.transition {
+    transition: background-color 0.7s ease;
+}

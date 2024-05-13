@@ -4,14 +4,16 @@ defmodule TestFinal.User do
 
   schema "users" do
     field :email, :string
-    field :password, :string
+    field :password_hash, :string
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
-  def changeset(user, attrs \\ %{}) do
+  @doc false
+  def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :password])
-    |> validate_required([:email, :password])
+    |> cast(attrs, [:email, :password_hash])
+    |> validate_required([:email, :password_hash])
+    |> unique_constraint(:email)
   end
 end

@@ -1,6 +1,7 @@
 defmodule TestFinalWeb.RegisterLive do
   # use TestFinalWeb, :live_view
   use Phoenix.LiveView, layout: false
+  import Ecto.Changeset, only: [cast: 3, validate_required: 2]
   alias TestFinal.User
 
   def render(assigns) do
@@ -130,26 +131,36 @@ defmodule TestFinalWeb.RegisterLive do
     """
   end
 
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, layout: false)}
+  def handle_event("submit_form", %{"email" => email, "confirm-password" => password}, socket) do
+    case create_user(email, password) do
+      {:ok, user} ->
+        # User was created successfully, handle accordingly
+        {:noreply, socket}
+  
+      {:error, changeset} ->
+        # User was not created, handle accordingly
+        IO.inspect(changeset.errors)
+        {:noreply, socket}
+    end
+  end
+  
+  defp create_user(email, password) do
+  
+    changeset = TestFinal.User.changeset(%TestFinal.User{}, %{email: email, password_hash: password})
+  
+    case TestFinal.Repo.insert(changeset) do
+      {:ok, user} ->
+        {:ok, user}
+  
+      {:error, changeset} ->
+        {:error, changeset}
+    end
   end
 
-    # Handle form submission event
-    def handle_event("submit_form", %{"email" => email, "password" => password}, socket) do
-    # Assuming you have a User schema defined
-    changeset = User.changeset(%User{}, %{
-        email: email,
-        password: password
-    })
-
-    case TestFinal.Repo.insert(changeset) do
-        {:ok, _user} ->
-        # Insertion successful, redirect or perform any necessary action
-        {:noreply, socket}
-        {:error, changeset} ->
-        # Insertion failed due to validation errors
-        {:noreply, assign(socket, changeset: changeset)}
-    end
-end
+  def changeset(user, attrs) do
+    user
+    |> cast(attrs, [:email, :password_hash])
+    |> validate_required([:email, :password_hash])
+  end
 
 end
