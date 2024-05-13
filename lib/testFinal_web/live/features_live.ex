@@ -181,28 +181,6 @@ defmodule TestFinalWeb.FeaturesLive do
     </div>
 
 
-    <div class="p-4 sm:ml-64 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 grid-rows-2 gap-4 ">
-      <%!-- Temperature --%>
-      <div id="temperature-card2" data-target="dropzone" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" draggable="true" style="z-index: 999;">
-        <img src="/images/icons8-temperature-96.png" alt="Temperature Icon" style="filter: invert(100%)" class="float-right">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Temperature</h5>
-        <p class="font-normal text-gray-700 dark:text-gray-400">21 º C</p>
-      </div>
-      <%!-- Humidity --%>
-      <div class="col-start-1 row-start-2 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <img src="/images/icons8-drop-96.png" alt="Humidity Icon"  style="filter: invert(100%)" class="float-right">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Humidity</h5>
-        <p class="font-normal text-gray-700 dark:text-gray-400">90%</p>
-      </div>
-      <%!-- Data --%>
-      <div class="row-span-2 col-start-2 row-start-1 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Data</h5>
-        <img src="/images/map-example.jpg" class="my-6 border border-slate-950" alt="Map example">
-        <p class="font-normal text-gray-700 dark:text-gray-400"><b>ID:</b> 23</p>
-        <p class="font-normal text-gray-700 dark:text-gray-400"><b>Location:</b> Bishoptown</p>
-        <p class="font-normal text-gray-700 dark:text-gray-400"><b>Name:</b> John</p>
-      </div>
-    </div>
 
 
     <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 rotate-180">
