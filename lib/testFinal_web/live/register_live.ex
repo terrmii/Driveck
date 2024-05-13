@@ -135,7 +135,7 @@ defmodule TestFinalWeb.RegisterLive do
     case create_user(email, password) do
       {:ok, user} ->
         # User was created successfully, handle accordingly
-        {:noreply, socket}
+        {:noreply, push_redirect(socket, to: "/features")}
   
       {:error, changeset} ->
         # User was not created, handle accordingly
